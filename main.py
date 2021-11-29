@@ -100,6 +100,8 @@ def combine_letters(first, second, sign):
     char_total = ord(first) + sign*(ord(second) - 64)
     if char_total > 90:
         return chr(char_total - 26)
+    if char_total < 65:
+        return chr(char_total + 26)
     return chr(char_total)
     
 
