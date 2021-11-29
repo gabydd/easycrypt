@@ -33,8 +33,8 @@ def get_str_list(prompt: str = None) -> list[str]:
     string = input(prompt)
     str_list = []
     for char in string:
-        if "a" <= char.lower() <= "z":
-            str_list.append(char.lower())
+        if "A" <= char.upper() <= "Z":
+            str_list.append(char.upper())
     return str_list
 
 
