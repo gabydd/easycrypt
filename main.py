@@ -2,9 +2,9 @@
 import random
 
 
-def chunked_string(letter_list: list[str]) -> str:
+def chunked_string(letter_list: str) -> str:
     """Return a string made up of uppercase letters from a letter_list
-    seperated into groups of 5
+    chunked into groups of 5
     
     >>> chunked_string([])
     """
@@ -28,30 +28,30 @@ def get_int(prompt: str = None) -> int:
             print("invalid input")
 
 
-def get_str_list(prompt: str = None) -> list[str]:
+def get_str(prompt: str = None) -> str:
     """As"""
     string = input(prompt)
-    str_list = []
+    letters = ""
     for char in string:
         if "A" <= char.upper() <= "Z":
-            str_list.append(char.upper())
-    return str_list
+            letters += char.upper()
+    return letters
 
 
-def get_key() -> list[str]:
+def get_key() -> str:
     while True:
-        key = get_str_list("A key is any string of letters (1-500 chars): ")
+        key = get_str("A key is any string of letters (1-500 chars): ")
         if 0 < len(key) < 501:
             print("Using encryption key: {}\n".format(chunked_string(key)))
             return key
         print("invalid length")
 
 
-def gen_key(length: int) -> list[str]:
+def gen_key(length: int) -> str:
     """Genetate a length long list of letters"""
-    key = []
+    key = ""
     for _ in range(length):
-        key.append(chr(random.randrange(65, 91)))
+        key += chr(random.randrange(65, 91))
     return key
 
 
@@ -72,9 +72,9 @@ def main_menu():
         print("Invalid choice. Try again.")
 
 
-def encrypt_menu() -> tuple[list[str], list[str]]:
+def encrypt_menu() -> tuple[str, str]:
     """"""
-    plaintext = get_str_list("Please enter text to encrypt: ")
+    plaintext = get_str("Please enter text to encrypt: ")
     print("This is the plaintext: {}\n".format(chunked_string(plaintext)))
     return plaintext, get_key()
 
@@ -90,8 +90,8 @@ def key_gen_menu() -> int:
         print("invalid length")
 
 
-def decrypt_menu() -> tuple[list[str], list[str]]:
-    ciphertext = get_str_list("Please enter text to decrypt: ")
+def decrypt_menu() -> tuple[str, str]:
+    ciphertext = get_str("Please enter text to decrypt: ")
     print("This is the ciphertext: {}\n".format(chunked_string(ciphertext)))
     return ciphertext, get_key()
 
@@ -105,25 +105,28 @@ def combine_letters(first, second, sign):
     return chr(char_total)
     
 
-def easycrypt(text: list[str], key: list[str], decrypt: bool = False) -> list[str]:
+def easycrypt(text: str, key: str, decrypt: bool = False) -> str:
     sign = 1
     if decrypt:
         sign = -1
-    encrypted_message: list[str] = []
+    encrypted_message: str = ""
 
     for i in range(len(text)):
-        encrypted_message.append(combine_letters(text[i], key[i], sign))
+        encrypted_message += (combine_letters(text[i], key[i], sign))
     return encrypted_message
 
 
-def fill_plaintext(plaintext: list[str]):
-    while len(plaintext) % 5 != 0:
-        plaintext.append(chr(random.randrange(96, 123)))
+def fill_plaintext(plaintext: str):
+    letters_needed = 5 - len(plaintext) % 5
+    if letters_needed == 5:
+        letters_needed = 0
+    return plaintext + gen_key(letters_needed)
 
 
-def fill_key(key: list[str], text: list[str]):
+def fill_key(key: str, text: str):
     while len(key) < len(text):
-        key.append(key[-1])
+        key += (key[-1])
+    return key
 
 
 def main():
@@ -139,8 +142,8 @@ EasyCrypt Text Encryptor/Decryptor
         if choice == 1:
             print()
             plaintext, key = encrypt_menu()
-            fill_plaintext(plaintext)
-            fill_key(key, plaintext)
+            plaintext = fill_plaintext(plaintext)
+            key = fill_key(key, plaintext)
             print("Your message has been encrypted:")
             print(chunked_string(easycrypt(plaintext, key)))
             print()
