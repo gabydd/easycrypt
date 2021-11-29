@@ -51,7 +51,7 @@ def gen_key(length: int) -> list[str]:
     """Genetate a length long list of letters"""
     key = []
     for _ in range(length):
-        key.append(chr(random.randrange(97, 123)))
+        key.append(chr(random.randrange(65, 91)))
     return key
 
 
@@ -97,8 +97,8 @@ def decrypt_menu() -> tuple[list[str], list[str]]:
 
 
 def combine_letters(first, second, sign):
-    char_total = ord(first) + sign*(ord(second) - 96)
-    if char_total > 122:
+    char_total = ord(first) + sign*(ord(second) - 64)
+    if char_total > 90:
         return chr(char_total - 26)
     return chr(char_total)
     
@@ -155,7 +155,7 @@ EasyCrypt Text Encryptor/Decryptor
             length = key_gen_menu()
             key_string = ""
             for letter in gen_key(length):
-                key_string += letter.upper()
+                key_string += letter
             print(key_string)
             print()
 
