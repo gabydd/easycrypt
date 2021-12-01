@@ -24,6 +24,7 @@ def chunked_string(letters: str) -> str:
     string = ""
 
     for i in range(len(letters)):
+        # Every 5 consecutive characters are separated by a space.
         if (i + 1) % 5 == 0:
             string += letters[i].upper() + " "
         else:
@@ -39,6 +40,7 @@ def get_int(prompt: str) -> int:
     while True:
         try:
             return int(input(prompt))
+        # Ensure user enters an integer.
         except ValueError:
             print("invalid input")
 
@@ -52,6 +54,7 @@ def get_str(prompt: str) -> str:
     letters = ""
 
     for char in string:
+        # Filter out all non-letters. 
         if "A" <= char.upper() <= "Z":
             letters += char.upper()
 
@@ -62,10 +65,13 @@ def get_str(prompt: str) -> str:
 def get_key() -> str:
     """Return a string with a length of 1-500, spaced out in chunks of 5."""
 
+    MAX_LENGTH = 500
+
     while True:
         key = get_str("A key is any string of letters (1-500 chars): ")
 
-        if 0 < len(key) < 501:
+        # Ensure user enters length between 1 and 500, inclusive. 
+        if 0 < len(key) <= MAX_LENGTH:
             print("Using encryption key: {}\n".format(key))
             return key
 
@@ -175,8 +181,10 @@ def combine_letters(first: str, second: str, sign: int) -> str:
     ASCII_CONVERSION = 26
     ENCRYPTION_CONVERSION = 64
 
+    # Add alphabet placement of character second to character first.
     char_total = ord(first) + sign*(ord(second) - ENCRYPTION_CONVERSION)
 
+    
     if chr(char_total) > "Z":
         return chr(char_total - ASCII_CONVERSION)
 
@@ -264,7 +272,7 @@ def shortest_repeating_substring(string: str) -> str:
 
         length_sub = len(curr_substring)
 
-        # Check for full reoccurrences of the substring.
+        # Check for full reoccurences of the substring.
         repeat = length // length_sub
 
         start_index = 0
@@ -281,7 +289,7 @@ def shortest_repeating_substring(string: str) -> str:
                 continue
 
             else:
-                # Check remaining letters for partial occurrence 
+                # Check remaining letters for partial occurence 
                 # of the substring.
                 shortest_substring = curr_substring
                 is_matching = True
@@ -351,8 +359,6 @@ def main():
 
         elif choice == 5:
             break
-    
-    print("\nThank you for using EasyCrypt. Goodbye.")
 
 
 if __name__ == "__main__":
