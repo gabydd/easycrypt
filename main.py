@@ -351,6 +351,8 @@ def main():
 
         elif choice == 5:
             break
+    
+    print("\nThank you for using EasyCrypt. Goodbye.")
 
 
 if __name__ == "__main__":
