@@ -184,7 +184,7 @@ def combine_letters(first: str, second: str, sign: int) -> str:
     # Add alphabet placement of character second to character first.
     char_total = ord(first) + sign*(ord(second) - ENCRYPTION_CONVERSION)
 
-    
+
     if chr(char_total) > "Z":
         return chr(char_total - ASCII_CONVERSION)
 
@@ -359,6 +359,8 @@ def main():
 
         elif choice == 5:
             break
+
+        print("Thank you for using Easycrypt. Goodbye.")
 
 
 if __name__ == "__main__":
