@@ -10,7 +10,7 @@ __author__ = "Gabriel Dinner-David, Allan Zhou"
 
 # Gaby (code) and Allan (docstring and examples)
 def chunked_string(letters: str) -> str:
-    """Space out the string letters in chunks of 5 letters, separacted by a 
+    """Space out the string letters in chunks of 5 letters, separated by a 
     space. Return the new string.
     
     >>> chunked_string("ABCDEFGH")
@@ -264,7 +264,7 @@ def shortest_repeating_substring(string: str) -> str:
 
         length_sub = len(curr_substring)
 
-        # Check for full reoccurences of the substring.
+        # Check for full reoccurrences of the substring.
         repeat = length // length_sub
 
         start_index = 0
@@ -281,7 +281,7 @@ def shortest_repeating_substring(string: str) -> str:
                 continue
 
             else:
-                # Check remaining letters for partial occurence 
+                # Check remaining letters for partial occurrence 
                 # of the substring.
                 shortest_substring = curr_substring
                 is_matching = True
