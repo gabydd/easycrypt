@@ -63,7 +63,7 @@ def get_str(prompt: str) -> str:
 
 # Gaby 
 def get_key() -> str:
-    """Return a string with a length of 1-500, spaced out in chunks of 5."""
+    """Return a string of letters with a length of 1-500"""
 
     MAX_LENGTH = 500
 
