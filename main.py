@@ -184,10 +184,11 @@ def combine_letters(first: str, second: str, sign: int) -> str:
     # Add alphabet placement of character second to character first.
     char_total = ord(first) + sign*(ord(second) - ENCRYPTION_CONVERSION)
 
-
+    # Rotate back to the start of the alphabet. 
     if chr(char_total) > "Z":
         return chr(char_total - ASCII_CONVERSION)
 
+    # Rotate forward to the end of the alphabet. 
     elif chr(char_total) < "A": 
         return chr(char_total + ASCII_CONVERSION)
 
@@ -217,7 +218,7 @@ def easycrypt(message: str, key: str, decrypt = False) -> str:
         if not decrypt: 
             new_message += combine_letters(message[i], key[key_counter], 1)
 
-        # Decryption
+        # Decryption 
         else:
             new_message += combine_letters(message[i], key[key_counter], -1)
 
@@ -360,7 +361,7 @@ def main():
         elif choice == 5:
             break
 
-        print("Thank you for using Easycrypt. Goodbye.")
+        print("\nThank you for using Easycrypt. Goodbye.")
 
 
 if __name__ == "__main__":
