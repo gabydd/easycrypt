@@ -287,25 +287,23 @@ def shortest_repeating_substring(string: str) -> str:
             elif end_index + length_sub <= length:
                 start_index += length_sub
                 end_index += length_sub
-                continue
 
             else:
                 # Check remaining letters for partial occurrence
                 # of the substring.
-                shortest_substring = curr_substring
                 is_matching = True
 
                 substring_index = 0
 
                 for i in range(end_index, length):
-                    if not (shortest_substring[substring_index] == string[i]):
+                    if not (curr_substring[substring_index] == string[i]):
                         is_matching = False
 
                     else:
                         substring_index += 1
 
                 if is_matching:
-                    return shortest_substring
+                    return curr_substring
 
 
 # Gaby and Allan
