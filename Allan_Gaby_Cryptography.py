@@ -42,7 +42,7 @@ def chunked_string(letters: str) -> str:
 
 # Gaby (code) and Allan (docstring)
 def get_int(prompt: str) -> int:
-    """Return a user inputted integer with prompt prompt."""
+    """Return a user inputted integer with prompt, prompt."""
 
     while True:
         try:
