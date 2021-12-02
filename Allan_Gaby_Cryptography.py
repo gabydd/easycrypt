@@ -10,15 +10,15 @@ __author__ = "Gabriel Dinner-David, Allan Zhou"
 
 # Gaby (code) and Allan (docstring and examples)
 def chunked_string(letters: str) -> str:
-    """Space out the string letters in chunks of 5 letters, separated by a 
+    """Space out the string letters in chunks of 5 letters, separated by a
     space. Return the new string.
-    
+
     >>> chunked_string("ABCDEFGH")
-    "ABCDE FGH" 
-    >>> chunked_string("ABCDE") 
-    "ABCDE" 
+    "ABCDE FGH"
+    >>> chunked_string("ABCDE")
+    "ABCDE"
     >>> chunked_string("HFSKAFHEF")
-    "HFSKA FHEF" 
+    "HFSKA FHEF"
     """
 
     string = ""
@@ -48,20 +48,20 @@ def get_int(prompt: str) -> int:
 # Gaby (code) and Allan (docstring)
 def get_str(prompt: str) -> str:
     """Get a string and filter out all characters not between A and Z.
-    Return the filtered string. """
+    Return the filtered string."""
 
     string = input(prompt)
     letters = ""
 
     for char in string:
-        # Filter out all non-letters. 
+        # Filter out all non-letters.
         if "A" <= char.upper() <= "Z":
             letters += char.upper()
 
     return letters
 
 
-# Gaby 
+# Gaby
 def get_key() -> str:
     """Return a string of letters with a length of 1-500"""
 
@@ -70,7 +70,7 @@ def get_key() -> str:
     while True:
         key = get_str("A key is any string of letters (1-500 chars): ")
 
-        # Ensure user enters length between 1 and 500, inclusive. 
+        # Ensure user enters length between 1 and 500, inclusive.
         if 0 < len(key) <= MAX_LENGTH:
             print("Using encryption key: {}\n".format(key))
             return key
@@ -78,9 +78,9 @@ def get_key() -> str:
         print("invalid length")
 
 
-# Gaby 
+# Gaby
 def generate_key(length: int) -> str:
-    """Generate a string with length characters."""
+    """Generate a random string of uppercase letters with length characters."""
 
     key = ""
 
@@ -95,12 +95,12 @@ def main_menu():
     """Print the easycrypt menu and return a valid user inputted choice."""
 
     print(
-        "Please choose from one of the following menu options:\n" +
-        "1. Encrypt plaintext.\n" + 
-        "2. Decrypt ciphertext.\n" + 
-        "3. Generate key.\n" + 
-        "4. Determine key.\n" + 
-        "5. Exit."
+        "Please choose from one of the following menu options:\n"
+        + "1. Encrypt plaintext.\n"
+        + "2. Decrypt ciphertext.\n"
+        + "3. Generate key.\n"
+        + "4. Determine key.\n"
+        + "5. Exit."
     )
 
     while True:
@@ -108,13 +108,13 @@ def main_menu():
 
         if 1 <= choice <= 5:
             return choice
-        
+
         print("Invalid choice. Try again.")
 
 
 # Gaby (header, body) and Allan (header and function docstring)
 def encrypt_menu() -> tuple:
-    """Get plaintext and a key from the user and print out the chunked 
+    """Get plaintext and a key from the user and print out the chunked
     version of it. Return the plaintext and key as strings."""
 
     plaintext = get_str("Please enter text to encrypt: ")
@@ -130,9 +130,8 @@ def key_gen_menu() -> int:
 
     MAX_LENGTH = 500
 
-    print("Generate an encryption key comprised of random characters " 
-        + "(max 500).")
-    
+    print("Generate an encryption key comprised of random characters " + "(max 500).")
+
     while True:
         length = get_int("Enter the desired length of key: ")
 
@@ -142,27 +141,27 @@ def key_gen_menu() -> int:
         print("invalid length")
 
 
-# Gaby 
+# Gaby
 def decrypt_menu() -> tuple:
-    """Get ciphertext and a key from the user and print out the chunked 
+    """Get ciphertext and a key from the user and print out the chunked
     version of it. Return the ciphertext and key as strings."""
 
     ciphertext = get_str("Please enter text to decrypt: ")
     print("This is the ciphertext: {}\n".format(chunked_string(ciphertext)))
-    
+
     return ciphertext, get_key()
 
 
 # Allan
-def key_menu() -> tuple: 
-    """Get plaintext and ciphertext from the user and print out the chunked 
+def key_menu() -> tuple:
+    """Get plaintext and ciphertext from the user and print out the chunked
     version of it. Return the plaintext and ciphertext as strings."""
 
     plaintext = get_str("Please enter the plaintext: ")
     print("This is the plaintext: {}\n".format(chunked_string(plaintext)))
 
     ciphertext = get_str("Please enter the ciphertext: ")
-    print("This is the ciphertext: {}\n".format(chunked_string(ciphertext))) 
+    print("This is the ciphertext: {}\n".format(chunked_string(ciphertext)))
 
     return plaintext, ciphertext
 
@@ -171,10 +170,10 @@ def key_menu() -> tuple:
 def combine_letters(first: str, second: str, sign: int) -> str:
     """Encrypt character first using character key second if sign is positive.
     Decrypt character first using character key second if sign is negative.
-    
+
     >>> combine_letters("A", "B", 1)
-    "C" 
-    >>> combine_letters("Z", "F", -1) 
+    "C"
+    >>> combine_letters("Z", "F", -1)
     "T"
     """
 
@@ -182,26 +181,26 @@ def combine_letters(first: str, second: str, sign: int) -> str:
     ENCRYPTION_CONVERSION = 64
 
     # Add alphabet placement of character second to character first.
-    char_total = ord(first) + sign*(ord(second) - ENCRYPTION_CONVERSION)
+    char_total = ord(first) + sign * (ord(second) - ENCRYPTION_CONVERSION)
 
-    # Rotate back to the start of the alphabet. 
+    # Rotate back to the start of the alphabet.
     if chr(char_total) > "Z":
         return chr(char_total - ASCII_CONVERSION)
 
-    # Rotate forward to the end of the alphabet. 
-    elif chr(char_total) < "A": 
+    # Rotate forward to the end of the alphabet.
+    elif chr(char_total) < "A":
         return chr(char_total + ASCII_CONVERSION)
 
     return chr(char_total)
-    
+
 
 # Allan
-def easycrypt(message: str, key: str, decrypt = False) -> str:
+def easycrypt(message: str, key: str, decrypt=False) -> str:
     """Return the decrypted version of message using encryption key, key.
     >>> easycrypt("HELLO WORLD", "ABC")
-    "IGOMQ ZPTOE" 
+    "IGOMQ ZPTOE"
     >>> easycrypt("IGOMQ ZPTOE", "ABC", True)
-    "HELLO WORLD" 
+    "HELLO WORLD"
     """
 
     new_message = ""
@@ -209,16 +208,16 @@ def easycrypt(message: str, key: str, decrypt = False) -> str:
     # Iterate through the string key to encrypt the message.
     key_counter = 0
 
-    for i in range(len(message)): 
+    for i in range(len(message)):
         # Rotate back to the first index of the key.
         if key_counter == len(key):
             key_counter = 0
 
-        # Encryption 
-        if not decrypt: 
+        # Encryption
+        if not decrypt:
             new_message += combine_letters(message[i], key[key_counter], 1)
 
-        # Decryption 
+        # Decryption
         else:
             new_message += combine_letters(message[i], key[key_counter], -1)
 
@@ -227,17 +226,17 @@ def easycrypt(message: str, key: str, decrypt = False) -> str:
     return new_message
 
 
-# Allan 
+# Allan
 def determine_key(msg: str, encrypted_msg: str) -> str:
-    """Print the encryption key from the initial message, msg, and 
-    the encrypted message, encrypted_msg. """
-    
+    """Print the encryption key from the initial message, msg, and
+    the encrypted message, encrypted_msg."""
+
     ALPHABET_LENGTH = 26
     ASCII_CONVERSION = 64
 
     key = ""
 
-    # Determine key using the shorter string between msg and encrypted_msg. 
+    # Determine key using the shorter string between msg and encrypted_msg.
     for i in range(min(len(msg), len(encrypted_msg))):
         if msg[i] == " ":
             continue
@@ -252,16 +251,16 @@ def determine_key(msg: str, encrypted_msg: str) -> str:
         key += chr(letter_shift + ASCII_CONVERSION)
 
     return shortest_repeating_substring(key)
-    
 
-# Allan 
+
+# Allan
 def shortest_repeating_substring(string: str) -> str:
     """Return the shortest repeating substring in the string, string.
 
-    >>> shortest_repeating_substring("AAAAAA") 
+    >>> shortest_repeating_substring("AAAAAA")
     "A"
     >>> shortest_repeating_substring("ABCABCABCAB")
-    "ABC" 
+    "ABC"
     >>> shortest_repeating_substring("ABCDEFGH")
     "ABCDEFGH"
     """
@@ -274,14 +273,14 @@ def shortest_repeating_substring(string: str) -> str:
 
         length_sub = len(curr_substring)
 
-        # Check for full reoccurences of the substring.
+        # Check for full reoccurrences of the substring.
         repeat = length // length_sub
 
         start_index = 0
         end_index = length_sub
 
         for i in range(repeat):
-            if not(curr_substring == string[start_index:end_index]):
+            if not (curr_substring == string[start_index:end_index]):
                 break
 
             # Check the next substring of letters in string.
@@ -291,7 +290,7 @@ def shortest_repeating_substring(string: str) -> str:
                 continue
 
             else:
-                # Check remaining letters for partial occurence 
+                # Check remaining letters for partial occurrence
                 # of the substring.
                 shortest_substring = curr_substring
                 is_matching = True
@@ -299,7 +298,7 @@ def shortest_repeating_substring(string: str) -> str:
                 substring_index = 0
 
                 for i in range(end_index, length):
-                    if not(shortest_substring[substring_index] == string[i]):
+                    if not (shortest_substring[substring_index] == string[i]):
                         is_matching = False
 
                     else:
@@ -322,11 +321,11 @@ def shortest_repeating_substring(string: str) -> str:
 def main():
     """Runs easycrypt with menu options for encryption, decryption, key
     generation, key determination, and exiting."""
-    
+
     print(
-        "----------------------------------\n" + 
-        "EasyCrypt Text Encryptor/Decryptor\n" + 
-        "----------------------------------"
+        "----------------------------------\n"
+        + "EasyCrypt Text Encryptor/Decryptor\n"
+        + "----------------------------------"
     )
 
     while True:
@@ -353,8 +352,8 @@ def main():
             print(generate_key(length))
             print()
 
-        elif choice == 4: 
-            print() 
+        elif choice == 4:
+            print()
             plaintext, ciphertext = key_menu()
             key = determine_key(plaintext, ciphertext)
             print("The encryption key used is: \n{}\n".format(key))
