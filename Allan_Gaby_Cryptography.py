@@ -133,8 +133,7 @@ def key_gen_menu() -> int:
     """Print the key generation menu and return a user inputted length.
     Ensure that the inputted integer length is between 1 and 500."""
 
-    print("Generate an encryption key comprised of random characters " 
-        + "(max 500).")
+    print("Generate an encryption key comprised of random characters (max 500).")
     
     while True:
         length = get_int("Enter the desired length of key: ")
@@ -198,7 +197,8 @@ def combine_letters(first: str, second: str, sign: int) -> str:
 
 # Allan
 def easycrypt(message: str, key: str, decrypt=False) -> str:
-    """Return the decrypted version of message using encryption key, key.
+    """Return the encrypted version of message using encryption key, key.
+    Return the decrypted message if decrypt is true
 
     >>> easycrypt("HELLO WORLD", "ABC")
     "IGOMQ ZPTOE"
@@ -233,7 +233,7 @@ def easycrypt(message: str, key: str, decrypt=False) -> str:
 # Allan
 def determine_key(msg: str, encrypted_msg: str) -> str:
     """Print the encryption key from the initial message, msg, and 
-    the encrypted message, encrypted_msg. """
+    the encrypted message, encrypted_msg."""
 
     key = ""
 
