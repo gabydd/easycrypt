@@ -65,7 +65,7 @@ def get_filtered_str(prompt: str) -> str:
 
 # Gaby (code) and Allan (docstring, examples)
 def filter_text(string):
-    """Return a str with only the characters in string between A and Z.
+    """Return a string with only the characters in string between A and Z.
     
     >>> filter_text("ADHS#*#@(DB#(#@EH")
     "ADHSDBEH"
@@ -85,7 +85,7 @@ def filter_text(string):
 
 # Gaby
 def get_key() -> str:
-    """Return a string of letters with a length of 1-500"""
+    """Return a string of letters with a length between 1 and 500."""
 
     while True:
         key = get_filtered_str("A key is any string of letters (1-500 chars): ")
@@ -132,7 +132,7 @@ def main_menu():
         print("Invalid choice. Try again.")
 
 
-# Gaby (header, body) and Allan (header and function docstring)
+# Gaby (body) and Allan (header and function docstring)
 def encrypt_menu() -> tuple:
     """Get plaintext and a key from the user and print out the chunked
     version of it. Return the plaintext and key as strings."""
@@ -212,8 +212,9 @@ def combine_letters(first: str, second: str, sign: int) -> str:
 
 # Allan
 def easycrypt(message: str, key: str, decrypt=False) -> str:
-    """Return the encrypted version of message using encryption key, key.
-    Return the decrypted message if decrypt is true
+    """Return the encrypted version of message using encryption key, key, if
+    decrypt is False. Otherwise, return the decrypted version of message using
+    encryption key, key.
 
     >>> easycrypt("HELLO WORLD", "ABC")
     "IGOMQ ZPTOE"
