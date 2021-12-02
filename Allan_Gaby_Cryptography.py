@@ -63,6 +63,7 @@ def get_filtered_str(prompt: str) -> str:
     return letters
 
 
+# Gaby (code) and Allan (docstring, examples)
 def filter_text(string):
     """Return a str with only the characters in string between A and Z.
     
