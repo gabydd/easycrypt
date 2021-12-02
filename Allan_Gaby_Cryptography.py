@@ -251,7 +251,8 @@ def determine_key(msg: str, encrypted_msg: str) -> str:
 
 # Allan 
 def shortest_repeating_substring(string: str) -> str:
-    """Return the shortest repeating substring in string.
+    """Return the shortest repeating substring in the string, string.
+
     >>> shortest_repeating_substring("AAAAAA") 
     "A"
     >>> shortest_repeating_substring("ABCABCABCAB")
