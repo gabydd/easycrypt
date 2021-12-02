@@ -260,7 +260,7 @@ def shortest_repeating_substring(string: str) -> str:
 
     >>> shortest_repeating_substring("ABCABCABCAB")
     "ABC"
-    
+
     >>> shortest_repeating_substring("ABCDEFGH")
     "ABCDEFGH"
     """
@@ -350,9 +350,8 @@ def main():
             print("The encryption key used is: \n{}\n".format(key))
 
         elif choice == 5:
+            print("\nThank you for using Easycrypt. Goodbye.")
             break
-
-        print("\nThank you for using Easycrypt. Goodbye.")
 
 
 if __name__ == "__main__":
