@@ -1,12 +1,9 @@
 """This program performs encryption, decryption, key generation, and 
 key determination. """
 
-
 import random
 
-
 __author__ = "Gabriel Dinner-David, Allan Zhou"
-
 
 ALPHABET_LENGTH = 26
 ASCII_CONVERSION = 64
