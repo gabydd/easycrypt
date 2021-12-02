@@ -8,6 +8,11 @@ import random
 __author__ = "Gabriel Dinner-David, Allan Zhou"
 
 
+ALPHABET_LENGTH = 26
+ASCII_CONVERSION = 64
+MAX_KEY_LENGTH = 500 
+
+
 # Gaby (code) and Allan (docstring and examples)
 def chunked_string(letters: str) -> str:
     """Space out the string letters in chunks of 5 letters, separated by a 
@@ -65,13 +70,11 @@ def get_str(prompt: str) -> str:
 def get_key() -> str:
     """Return a string of letters with a length of 1-500"""
 
-    MAX_LENGTH = 500
-
     while True:
         key = get_str("A key is any string of letters (1-500 chars): ")
 
         # Ensure user enters length between 1 and 500, inclusive. 
-        if 0 < len(key) <= MAX_LENGTH:
+        if 0 < len(key) <= MAX_KEY_LENGTH:
             print("Using encryption key: {}\n".format(key))
             return key
 
@@ -128,15 +131,13 @@ def key_gen_menu() -> int:
     """Print the key generation menu and return a user inputted length.
     Ensure that the inputted integer length is between 1 and 500."""
 
-    MAX_LENGTH = 500
-
     print("Generate an encryption key comprised of random characters " 
         + "(max 500).")
     
     while True:
         length = get_int("Enter the desired length of key: ")
 
-        if 0 < length <= MAX_LENGTH:
+        if 0 < length <= MAX_KEY_LENGTH:
             return length
 
         print("invalid length")
@@ -178,19 +179,16 @@ def combine_letters(first: str, second: str, sign: int) -> str:
     "T"
     """
 
-    ASCII_CONVERSION = 26
-    ENCRYPTION_CONVERSION = 64
-
     # Add alphabet placement of character second to character first.
-    char_total = ord(first) + sign*(ord(second) - ENCRYPTION_CONVERSION)
+    char_total = ord(first) + sign*(ord(second) - ASCII_CONVERSION)
 
     # Rotate back to the start of the alphabet. 
     if chr(char_total) > "Z":
-        return chr(char_total - ASCII_CONVERSION)
+        return chr(char_total - ALPHABET_LENGTH)
 
     # Rotate forward to the end of the alphabet. 
     elif chr(char_total) < "A": 
-        return chr(char_total + ASCII_CONVERSION)
+        return chr(char_total + ALPHABET_LENGTH)
 
     return chr(char_total)
     
@@ -231,9 +229,6 @@ def easycrypt(message: str, key: str, decrypt = False) -> str:
 def determine_key(msg: str, encrypted_msg: str) -> str:
     """Print the encryption key from the initial message, msg, and 
     the encrypted message, encrypted_msg. """
-    
-    ALPHABET_LENGTH = 26
-    ASCII_CONVERSION = 64
 
     key = ""
 
