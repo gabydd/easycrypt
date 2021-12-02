@@ -55,13 +55,13 @@ def get_str(prompt: str) -> str:
     """Get a string and filter out all characters not between A and Z.
     Return the filtered string."""
 
-    string = input(prompt)
+    string = input(prompt).upper()
     letters = ""
 
     for char in string:
         # Filter out all non-letters.
-        if "A" <= char.upper() <= "Z":
-            letters += char.upper()
+        if "A" <= char <= "Z":
+            letters += char
 
     return letters
 
@@ -235,9 +235,6 @@ def determine_key(msg: str, encrypted_msg: str) -> str:
 
     # Determine key using the shorter string between msg and encrypted_msg.
     for i in range(min(len(msg), len(encrypted_msg))):
-        if msg[i] == " ":
-            continue
-
         # Figure out the size of the letter shift.
         letter_shift = ord(encrypted_msg[i]) - ord(msg[i])
 
