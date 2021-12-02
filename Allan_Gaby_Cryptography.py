@@ -58,8 +58,15 @@ def get_filtered_str(prompt: str) -> str:
     Return the filtered string."""
 
     string = input(prompt).upper()
-    letters = ""
+    letters = filter_text(string)
 
+    return letters
+
+
+def filter_text(string):
+    """Return a str with only the characters in string between A and Z."""
+
+    letters = ""
     for char in string:
         # Filter out all non-letters.
         if "A" <= char <= "Z":
