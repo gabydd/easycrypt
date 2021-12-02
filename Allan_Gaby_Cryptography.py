@@ -20,8 +20,10 @@ def chunked_string(letters: str) -> str:
 
     >>> chunked_string("ABCDEFGH")
     "ABCDE FGH"
+
     >>> chunked_string("ABCDE")
     "ABCDE"
+
     >>> chunked_string("HFSKAFHEF")
     "HFSKA FHEF"
     """
@@ -174,6 +176,7 @@ def combine_letters(first: str, second: str, sign: int) -> str:
 
     >>> combine_letters("A", "B", 1)
     "C"
+
     >>> combine_letters("Z", "F", -1)
     "T"
     """
@@ -199,6 +202,7 @@ def easycrypt(message: str, key: str, decrypt=False) -> str:
 
     >>> easycrypt("HELLO WORLD", "ABC")
     "IGOMQ ZPTOE"
+
     >>> easycrypt("IGOMQ ZPTOE", "ABC", True)
     "HELLO WORLD"
     """
@@ -253,8 +257,10 @@ def shortest_repeating_substring(string: str) -> str:
 
     >>> shortest_repeating_substring("AAAAAA")
     "A"
+
     >>> shortest_repeating_substring("ABCABCABCAB")
     "ABC"
+    
     >>> shortest_repeating_substring("ABCDEFGH")
     "ABCDEFGH"
     """
