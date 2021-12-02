@@ -301,16 +301,7 @@ def shortest_repeating_substring(string: str) -> str:
                         substring_index += 1
 
                 if is_matching:
-                    # Key should be given in chunks of 5 characters.
-                    key = ""
-
-                    for i in range(len(shortest_substring)):
-                        if i % 5 == 0 and i != 0:
-                            key += " "
-
-                        key += shortest_substring[i]
-
-                    return key
+                    return shortest_substring
 
 
 # Gaby and Allan
