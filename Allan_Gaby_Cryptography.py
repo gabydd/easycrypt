@@ -1,9 +1,12 @@
 """This program performs encryption, decryption, key generation, and 
 key determination. """
 
-import random
 
 __author__ = "Gabriel Dinner-David, Allan Zhou"
+
+
+import random
+
 
 ALPHABET_LENGTH = 26
 ASCII_CONVERSION = 64
@@ -193,7 +196,7 @@ def combine_letters(first: str, second: str, sign: int) -> str:
 # Allan
 def easycrypt(message: str, key: str, decrypt=False) -> str:
     """Return the decrypted version of message using encryption key, key.
-    
+
     >>> easycrypt("HELLO WORLD", "ABC")
     "IGOMQ ZPTOE"
     >>> easycrypt("IGOMQ ZPTOE", "ABC", True)
