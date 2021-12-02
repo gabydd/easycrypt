@@ -53,7 +53,7 @@ def get_int(prompt: str) -> int:
 
 
 # Gaby (code) and Allan (docstring)
-def get_str(prompt: str) -> str:
+def get_filtered_str(prompt: str) -> str:
     """Get a string and filter out all characters not between A and Z.
     Return the filtered string."""
 
@@ -73,7 +73,7 @@ def get_key() -> str:
     """Return a string of letters with a length of 1-500"""
 
     while True:
-        key = get_str("A key is any string of letters (1-500 chars): ")
+        key = get_filtered_str("A key is any string of letters (1-500 chars): ")
 
         # Ensure user enters length between 1 and 500, inclusive. 
         if 0 < len(key) <= MAX_KEY_LENGTH:
@@ -122,7 +122,7 @@ def encrypt_menu() -> tuple:
     """Get plaintext and a key from the user and print out the chunked
     version of it. Return the plaintext and key as strings."""
 
-    plaintext = get_str("Please enter text to encrypt: ")
+    plaintext = get_filtered_str("Please enter text to encrypt: ")
     print("This is the plaintext: {}\n".format(chunked_string(plaintext)))
 
     return plaintext, get_key()
@@ -149,7 +149,7 @@ def decrypt_menu() -> tuple:
     """Get ciphertext and a key from the user and print out the chunked
     version of it. Return the ciphertext and key as strings."""
 
-    ciphertext = get_str("Please enter text to decrypt: ")
+    ciphertext = get_filtered_str("Please enter text to decrypt: ")
     print("This is the ciphertext: {}\n".format(chunked_string(ciphertext)))
 
     return ciphertext, get_key()
@@ -160,10 +160,10 @@ def key_menu() -> tuple:
     """Get plaintext and ciphertext from the user and print out the chunked
     version of it. Return the plaintext and ciphertext as strings."""
 
-    plaintext = get_str("Please enter the plaintext: ")
+    plaintext = get_filtered_str("Please enter the plaintext: ")
     print("This is the plaintext: {}\n".format(chunked_string(plaintext)))
 
-    ciphertext = get_str("Please enter the ciphertext: ")
+    ciphertext = get_filtered_str("Please enter the ciphertext: ")
     print("This is the ciphertext: {}\n".format(chunked_string(ciphertext)))
 
     return plaintext, ciphertext
