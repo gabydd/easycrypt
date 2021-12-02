@@ -64,7 +64,14 @@ def get_filtered_str(prompt: str) -> str:
 
 
 def filter_text(string):
-    """Return a str with only the characters in string between A and Z."""
+    """Return a str with only the characters in string between A and Z.
+    
+    >>> filter_text("ADHS#*#@(DB#(#@EH")
+    "ADHSDBEH"
+
+    >>> filter_text("ABCDE")
+    "ABCDE"
+    """
 
     letters = ""
     for char in string:
