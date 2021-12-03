@@ -67,7 +67,7 @@ def get_filtered_str(prompt: str) -> str:
 
 
 # Gaby (code) and Allan (docstring, examples)
-def filter_text(string):
+def filter_text(string: str) -> str:
     """Return a string with only the characters in string between A and Z.
     
     >>> filter_text("ADHS#*#@(DB#(#@EH")
@@ -95,7 +95,7 @@ def add_characters(string: str) -> str:
     required_letters = (SPACING - (len(string) % SPACING)) % SPACING
 
     # Add required_letters characters to string.
-    string += generate_key(required_letters)
+    string += generate_letters(required_letters)
 
     return string 
 
@@ -116,12 +116,12 @@ def get_key() -> str:
 
 
 # Gaby
-def generate_key(length: int) -> str:
+def generate_letters(length: int) -> str:
     """Generate a random string of uppercase letters with length characters."""
 
     key = ""
 
-    for _ in range(length):
+    for i in range(length):
         # Add random letters between A and Z to key, inclusive.
         key += chr(random.randrange(65, 91))
 
@@ -381,7 +381,7 @@ def main():
             print()
             length = key_gen_menu()
             print("Your new encryption key: ")
-            print(generate_key(length))
+            print(generate_letters(length))
             print()
 
         elif choice == 4:
