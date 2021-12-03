@@ -92,11 +92,12 @@ def add_characters(string: str) -> str:
     string is not a multiple of 5, add random characters between A and Z
     until the length of string is a multiple of 5.""" 
 
-    length = len(string)
-    required_letters = (SPACING - (length % SPACING)) % SPACING
-    random_chars = generate_key(required_letters)
+    required_letters = (SPACING - (len(string) % SPACING)) % SPACING
 
-    return string + random_chars
+    # Add required_letters characters to string.
+    string += generate_key(required_letters)
+
+    return string 
 
 
 # Gaby
@@ -121,6 +122,7 @@ def generate_key(length: int) -> str:
     key = ""
 
     for _ in range(length):
+        # Add random letters between A and Z to key, inclusive.
         key += chr(random.randrange(65, 91))
 
     return key
@@ -142,6 +144,7 @@ def main_menu():
     while True:
         choice = get_int("> ")
 
+        # Ensure user enters valid option.
         if 1 <= choice <= 5:
             return choice
 
@@ -154,7 +157,6 @@ def encrypt_menu() -> tuple:
     version of it. Return the plaintext and key as strings."""
 
     plaintext = get_filtered_str("Please enter text to encrypt: ")
-    plaintext = add_characters(plaintext)
 
     print("This is the plaintext: {}\n".format(chunked_string(plaintext)))
 
@@ -171,6 +173,7 @@ def key_gen_menu() -> int:
     while True:
         length = get_int("Enter the desired length of key: ")
 
+        # Ensure user enters valid length (between 1 and 500 characters). 
         if 0 < length <= MAX_KEY_LENGTH:
             return length
 
@@ -183,7 +186,6 @@ def decrypt_menu() -> tuple:
     version of it. Return the ciphertext and key as strings."""
 
     ciphertext = get_filtered_str("Please enter text to decrypt: ")
-    ciphertext = add_characters(ciphertext)
 
     print("This is the ciphertext: {}\n".format(chunked_string(ciphertext)))
 
@@ -263,7 +265,12 @@ def easycrypt(message: str, key: str, decrypt=False) -> str:
 
         key_counter += 1
 
-    return new_message
+    if not decrypt:
+        # Encrypted messages are in chunks of 5. 
+        # Additional characters may be required. 
+        return add_characters(new_message) 
+    else: 
+        return new_message
 
 
 # Allan
@@ -349,7 +356,7 @@ def main():
 
     print(
         "----------------------------------\n"
-        + "EasyCrypt Text Encryptor/Decryptor\n"
+        + "Easycrypt Text Encryptor/Decryptor\n"
         + "----------------------------------"
     )
 
