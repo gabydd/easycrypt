@@ -1,5 +1,7 @@
 """This program performs encryption, decryption, key generation, and 
-key determination. """
+key determination. When performing encryption, the program takes in plaintext 
+and a key. When performing decryption, the program takes in ciphertext and a
+key. When generating a key, the program will take in an integer for the length."""
 
 
 __author__ = "Gabriel Dinner-David, Allan Zhou"
@@ -11,6 +13,7 @@ import random
 ALPHABET_LENGTH = 26
 ASCII_CONVERSION = 64
 MAX_KEY_LENGTH = 500 
+SPACING = 5
 
 
 # Gaby (code) and Allan (docstring and examples)
@@ -32,7 +35,7 @@ def chunked_string(letters: str) -> str:
 
     for i in range(len(letters)):
         # Every 5 consecutive characters are separated by a space.
-        if (i + 1) % 5 == 0:
+        if (i + 1) % SPACING == 0:
             string += letters[i].upper() + " "
         else:
             string += letters[i].upper()
@@ -81,6 +84,19 @@ def filter_text(string):
             letters += char
 
     return letters
+
+
+# Allan 
+def add_characters(string: str) -> str: 
+    """Return a version of string that has a length of a multiple of 5. If 
+    string is not a multiple of 5, add random characters between A and Z
+    until the length of string is a multiple of 5.""" 
+
+    length = len(string)
+    required_letters = (SPACING - (length % SPACING)) % SPACING
+    random_chars = generate_key(required_letters)
+
+    return string + random_chars
 
 
 # Gaby
@@ -138,6 +154,8 @@ def encrypt_menu() -> tuple:
     version of it. Return the plaintext and key as strings."""
 
     plaintext = get_filtered_str("Please enter text to encrypt: ")
+    plaintext = add_characters(plaintext)
+
     print("This is the plaintext: {}\n".format(chunked_string(plaintext)))
 
     return plaintext, get_key()
@@ -165,6 +183,8 @@ def decrypt_menu() -> tuple:
     version of it. Return the ciphertext and key as strings."""
 
     ciphertext = get_filtered_str("Please enter text to decrypt: ")
+    ciphertext = add_characters(ciphertext)
+
     print("This is the ciphertext: {}\n".format(chunked_string(ciphertext)))
 
     return ciphertext, get_key()
